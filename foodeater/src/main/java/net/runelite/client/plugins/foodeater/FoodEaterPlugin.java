@@ -94,21 +94,20 @@ public class FoodEaterPlugin extends Plugin
 				String[] foodItems = config.foodToEat().split(",");
 				out:	for (int i = 0; i < foodItems.length; i++)
 				{
-					for (WidgetItem item : inventory.getWidgetItems())
+				for (WidgetItem item : inventory.getWidgetItems())
+				{
+					final String name = this.itemManager.getItemDefinition(item.getId()).getName();
+					if(foodItems[i].equalsIgnoreCase(name))
 					{
-						final String name = this.itemManager.getItemDefinition(item.getId()).getName();
-						if(foodItems[i].equalsIgnoreCase(name))
-						{
-							entry = getConsumableEntry(foodItems[i], item.getId(), item.getIndex());
-							log.info("Food name = " + foodItems[i] + " || Food ID = " + item.getId() + " || Food Index = " + item.getIndex() + " || String fooditems length = " + foodItems.length + " || counter = "+i);
-							click();
-							Thread.sleep(50);
-							i++;
-						}
-						if(i==2)
-						{
-							break out;
-						}
+						entry = getConsumableEntry(foodItems[i], item.getId(), item.getIndex());
+						click();
+						Thread.sleep(50);
+						i++;
+					}
+					if(i==2)
+					{
+						break out;
+					}
 					}
 				}
 			}
