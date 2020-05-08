@@ -30,7 +30,7 @@ open class BootstrapTask : DefaultTask() {
     private fun getBootstrap(): JSONArray? {
         val client = OkHttpClient()
 
-        val url = "https://raw.githubusercontent.com/open-osrs/plugin-hosting/master/plugins.json"
+        val url = "https://raw.githubusercontent.com/ben93riggs/plugin-hosting/master/plugins.json"
         val request = Request.Builder()
                 .url(url)
                 .build()
@@ -61,7 +61,7 @@ open class BootstrapTask : DefaultTask() {
                             "version" to it.project.version,
                             "requires" to ProjectVersions.apiVersion,
                             "date" to formatDate(Date()),
-                            "url" to "https://github.com/open-osrs/plugin-hosting/blob/master/release/${it.project.name}-${it.project.version}.jar?raw=true",
+                            "url" to "https://github.com/ben93riggs/plugin-hosting/blob/master/release/${it.project.name}-${it.project.version}.jar?raw=true",
                             "sha512sum" to hash(plugin.readBytes())
                     ))
 
@@ -69,8 +69,8 @@ open class BootstrapTask : DefaultTask() {
                             "name" to it.project.extra.get("PluginName"),
                             "id" to nameToId(it.project.extra.get("PluginName") as String),
                             "description" to it.project.extra.get("PluginDescription"),
-                            "provider" to "OpenOSRS",
-                            "projectUrl" to "https://discord.gg/OpenOSRS",
+                            "provider" to "ben93riggs",
+                            "projectUrl" to "https://discord.gg/7qrYdaC",
                             "releases" to releases.toTypedArray()
                     ).jsonObject()
 

@@ -16,17 +16,9 @@ jobs:
         with:
           title-regex: '^([\w-/]+): \w+'
 
-  validate:
-    name: Validate gradle wrapper
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: gradle/wrapper-validation-action@v1
-
   build:
-    name: Build
-    needs: [pr-lint, validate]
     runs-on: ubuntu-latest
+    name: Build
 
     steps:
       - name: Set up JDK 11
@@ -73,60 +65,10 @@ jobs:
       - name: Building plugins
         run: ./gradlew build --stacktrace -x test -x checkstyleMain --console=plain
 
-  test:
-    name: Test
-    needs: [pr-lint, validate]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-      - uses: actions/checkout@v1
-
-      - uses: actions/checkout@v1
-        with:
-          repository: open-osrs/runelite
-          ref: master
-
-      - uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Make gradlew executable (client)
-        run: chmod +x ./gradlew
-        working-directory: /home/runner/work/plugins/runelite
-
-      - name: Assembling client
-        run: ./gradlew assemble --console=plain
-        working-directory: /home/runner/work/plugins/runelite
-
-      - name: Building client
-        run: ./gradlew build --stacktrace -x test -x checkstyleMain --console=plain
-        working-directory: /home/runner/work/plugins/runelite
-
-      - name: Upload client artifacts to local maven
-        run: ./gradlew :http-api:publishToMavenLocal :runelite-api:publishToMavenLocal :runelite-client:publishToMavenLocal --console=plain
-        working-directory: /home/runner/work/plugins/runelite
-
-      - name: Make gradlew executable (plugins)
-        run: chmod +x ./gradlew
-
-      - name: Assembling plugins
-        run: ./gradlew assemble --console=plain
-
-      - name: Testing plugins
-        run: ./gradlew test --stacktrace -x test -x checkstyleMain --console=plain
 
   checkstyleMain:
-    name: Checkstyle main
-    needs: [pr-lint, validate]
     runs-on: ubuntu-latest
+    name: Checkstyle main
 
     steps:
       - name: Set up JDK 11
@@ -174,9 +116,8 @@ jobs:
         run: ./gradlew checkstyleMain --console=plain
 
   checkstyleTest:
-    name: Checkstyle test
-    needs: [pr-lint, validate]
     runs-on: ubuntu-latest
+    name: Checkstyle test
 
     steps:
       - name: Set up JDK 11
@@ -225,7 +166,6 @@ jobs:
 
   bump:
     name: Check version numbers
-    needs: [pr-lint, validate]
     runs-on: ubuntu-latest
 
     steps:
@@ -279,14 +219,12 @@ jobs:
           git update-index --skip-worktree gradlew
 
           if ! git diff-index --quiet HEAD --; then
-              git diff-index --name-only HEAD --
-
               exit 1
           fi
 
   approve:
     name: Approve
-    needs: [build, test, checkstyleMain, checkstyleTest, bump]
+    needs: [build, checkstyleMain, checkstyleTest, bump]
     runs-on: ubuntu-latest
 
     steps:
@@ -294,4 +232,4 @@ jobs:
         if: github.event_name == 'pull_request' && github.actor == 'OpenOSRS'
         uses: hmarr/auto-approve-action@v2.0.0
         with:
-          github-token: ${{ secrets.Owain }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
