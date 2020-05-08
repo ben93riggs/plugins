@@ -1,6 +1,7 @@
 package net.runelite.client.plugins.foodeater;
 
 import com.google.inject.Provides;
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.events.GameTick;
@@ -33,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 	enabledByDefault = false,
 	type = PluginType.PVM
 )
+@Slf4j
 public class FoodEaterPlugin extends Plugin
 {
 	@Inject
@@ -89,16 +91,24 @@ public class FoodEaterPlugin extends Plugin
 					return;
 				}
 
-				for (WidgetItem item : inventory.getWidgetItems())
+				String[] foodItems = config.foodToEat().split(",");
+				out:	for (int i = 0; i < foodItems.length; i++)
 				{
-					final String name = this.itemManager.getItemDefinition(item.getId()).getName();
-
-					if (name.equalsIgnoreCase(this.config.foodToEat()))
+					for (WidgetItem item : inventory.getWidgetItems())
 					{
-						entry = getConsumableEntry(name, item.getId(), item.getIndex());
-						click();
-						Thread.sleep(50);
-						return;
+						final String name = this.itemManager.getItemDefinition(item.getId()).getName();
+						if(foodItems[i].equalsIgnoreCase(name))
+						{
+							entry = getConsumableEntry(foodItems[i], item.getId(), item.getIndex());
+							log.info("Food name = " + foodItems[i] + " || Food ID = " + item.getId() + " || Food Index = " + item.getIndex() + " || String fooditems length = " + foodItems.length + " || counter = "+i);
+							click();
+							Thread.sleep(50);
+							i++;
+						}
+						if(i==2)
+						{
+							break out;
+						}
 					}
 				}
 			}

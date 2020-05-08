@@ -11,7 +11,7 @@ public interface FoodEaterConfig extends Config
 	@ConfigItem(
 		keyName = "foodToEat",
 		name = "Food",
-		description = "the exact name of the food to eat (not case sensitive)",
+		description = "use exact food name, separated by comma for combo eating",
 		position = 1
 	)
 	default String foodToEat()
