@@ -1,7 +1,6 @@
 package net.runelite.client.plugins.foodeater;
 
 import com.google.inject.Provides;
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.Point;
 import net.runelite.api.events.GameTick;
@@ -34,7 +33,6 @@ import java.util.concurrent.TimeUnit;
 	enabledByDefault = false,
 	type = PluginType.PVM
 )
-@Slf4j
 public class FoodEaterPlugin extends Plugin
 {
 	@Inject
