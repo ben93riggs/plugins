@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import com.google.inject.Provides;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDefinitionChanged;
 import net.runelite.api.widgets.Widget;
+import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -49,15 +52,29 @@ public class NightmarePlugin extends Plugin
 	@Nullable
 	private NPC nm;
 
+	@Inject
+	private NightmareHelperConfig config;
+
 	private boolean inFight;
 	private boolean cursed;
 	private int attacksSinceCurse;
+	private int timeout;
+	private boolean swapMage;
+	private boolean swapRange;
+	private boolean swapMelee;
+	private Prayer prayerToClick;
 
 	private MenuEntry entry;
 
 	public NightmarePlugin()
 	{
 		inFight = false;
+	}
+
+	@Provides
+	NightmareHelperConfig getConfig(ConfigManager configManager)
+	{
+		return configManager.getConfig(NightmareHelperConfig.class);
 	}
 
 	@Override
@@ -75,9 +92,14 @@ public class NightmarePlugin extends Plugin
 	private void reset()
 	{
 		inFight = false;
+		swapMage = false;
+		swapRange = false;
+		swapMelee = false;
 		nm = null;
 		cursed = false;
 		attacksSinceCurse = 0;
+		timeout = 0;
+		prayerToClick = null;
 	}
 
 	@Subscribe
@@ -101,15 +123,30 @@ public class NightmarePlugin extends Plugin
 		{
 			case NightmareAttackAnimations.NIGHTMARE_MAGIC_ATTACK:
 				attacksSinceCurse++;
-				activatePrayer(cursed ? Prayer.PROTECT_FROM_MELEE : Prayer.PROTECT_FROM_MAGIC);
+				timeout = config.ticksSleepRangeMage();
+				if(cursed) {
+					swapMelee = true;
+				} else {
+					swapMage = true;
+				}
 				break;
 			case NightmareAttackAnimations.NIGHTMARE_MELEE_ATTACK:
 				attacksSinceCurse++;
-				activatePrayer(cursed ? Prayer.PROTECT_FROM_MISSILES : Prayer.PROTECT_FROM_MELEE);
+				timeout = config.ticksSleepMelee();
+				if(cursed) {
+					swapRange = true;
+				} else {
+					swapMelee = true;
+				}
 				break;
 			case NightmareAttackAnimations.NIGHTMARE_RANGE_ATTACK:
 				attacksSinceCurse++;
-				activatePrayer(cursed ? Prayer.PROTECT_FROM_MAGIC : Prayer.PROTECT_FROM_MISSILES);
+				timeout = config.ticksSleepRangeMage();
+				if(cursed) {
+					swapMage = true;
+				} else {
+					swapRange = true;
+				}
 				break;
 			case NightmareAttackAnimations.NIGHTMARE_CURSE:
 				cursed = true;
@@ -178,6 +215,21 @@ public class NightmarePlugin extends Plugin
 		if (nm.getId() == NpcID.THE_NIGHTMARE_9433)
 		{
 			reset();
+		}
+
+		if (swapMage && timeout == 0) {
+			activatePrayer(Prayer.PROTECT_FROM_MAGIC);
+			swapMage = false;
+		} else if (swapRange && timeout == 0) {
+			activatePrayer(Prayer.PROTECT_FROM_MISSILES);
+			swapRange = false;
+		} else if (config.swapNightmareMelee() && swapMelee && timeout == 0) {
+			activatePrayer(Prayer.PROTECT_FROM_MELEE);
+			swapMelee = false;
+		}
+
+		if (timeout != 0) {
+			timeout--;
 		}
 	}
 
