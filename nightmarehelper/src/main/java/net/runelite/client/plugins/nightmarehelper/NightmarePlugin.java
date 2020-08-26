@@ -252,7 +252,7 @@ public class NightmarePlugin extends Plugin
 			return;
 		}
 
-		if (client.getBoostedSkillLevel(Skill.PRAYER) <= 0)
+		if (client.isPrayerActive(prayer) || client.getBoostedSkillLevel(Skill.PRAYER) <= 0)
 		{
 			return;
 		}
