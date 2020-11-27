@@ -84,6 +84,11 @@ public class FoodEaterPlugin extends Plugin
 				return;
 			}
 
+			if (client.getItemContainer(InventoryID.BANK) != null)
+			{
+				return;
+			}
+
 			for (WidgetItem item : inventory.getWidgetItems())
 			{
 				final String name = this.itemManager.getItemDefinition(item.getId()).getName();
