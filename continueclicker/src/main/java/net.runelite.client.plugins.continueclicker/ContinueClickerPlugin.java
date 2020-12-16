@@ -22,7 +22,7 @@ import org.pf4j.Extension;
 @Extension
 @PluginDescriptor(
 	name = "Continue Clicker",
-	description = "APresses continue on dialogue when available",
+	description = "Presses continue on dialogue when available",
 	tags = {"continue", "chat", "dialogue", "clicker"},
 	enabledByDefault = false,
 	type = PluginType.MISCELLANEOUS
@@ -64,6 +64,34 @@ public class ContinueClickerPlugin extends Plugin
 		}
 
 		widget = client.getWidget(WidgetInfo.DIALOG_PLAYER_CONTINUE);
+
+		if (widget != null && !widget.isHidden())
+		{
+			return widget;
+		}
+
+		widget = client.getWidget(WidgetInfo.LEVEL_UP_CONTINUE);
+
+		if (widget != null && !widget.isHidden())
+		{
+			return widget;
+		}
+
+		widget = client.getWidget(WidgetInfo.LEVEL_UP);
+
+		if (widget != null && !widget.isHidden())
+		{
+			return widget;
+		}
+
+		widget = client.getWidget(WidgetInfo.LEVEL_UP_SKILL);
+
+		if (widget != null && !widget.isHidden())
+		{
+			return widget;
+		}
+
+		widget = client.getWidget(WidgetInfo.LEVEL_UP_LEVEL);
 
 		if (widget != null && !widget.isHidden())
 		{
