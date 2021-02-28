@@ -2,7 +2,6 @@ package net.runelite.client.plugins.praypotdrinker;
 
 import java.util.Arrays;
 import net.runelite.api.Client;
-import net.runelite.api.Item;
 import net.runelite.api.ItemID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;

@@ -3,10 +3,8 @@ package net.runelite.client.plugins.nmzhelper.Tasks;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import net.runelite.api.Client;
-import net.runelite.api.ItemID;
-import net.runelite.api.Skill;
-import net.runelite.api.Varbits;
+
+import net.runelite.api.*;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.widgets.Widget;
 import net.runelite.api.widgets.WidgetInfo;
@@ -31,9 +29,9 @@ public class OverloadTask extends Task
 		//not in the nightmare zone
 		if (!MiscUtils.isInNightmareZone(client))
 			return false;
-
 		//already overloaded
-		if (client.getVar(Varbits.NMZ_OVERLOAD) != 0)
+		//if (client.getVar(NMZ_OVERLOAD) != 0)
+		if (client.getVarbitValue(3955) != 0)
 			return false;
 
 		//don't have overloads

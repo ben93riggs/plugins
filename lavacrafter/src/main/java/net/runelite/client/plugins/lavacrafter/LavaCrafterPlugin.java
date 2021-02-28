@@ -19,9 +19,9 @@ import net.runelite.api.InventoryID;
 import net.runelite.api.Item;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Player;
-import net.runelite.api.PlayerAppearance;
+import net.runelite.api.PlayerComposition;
 import net.runelite.api.Point;
 import net.runelite.api.Skill;
 import net.runelite.api.coords.WorldPoint;
@@ -40,7 +40,6 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.ui.overlay.OverlayManager;
 import org.apache.commons.lang3.time.StopWatch;
 import org.pf4j.Extension;
@@ -51,8 +50,7 @@ import org.pf4j.Extension;
 	name = "Lava Crafter",
 	description = "Lava Crafting Helper",
 	tags = {"rc", "rune", "crafting", "runecrafting", "lava", "craft", "crafter", "skilling", "helper", "automation", "ben"},
-	enabledByDefault = false,
-	type = PluginType.SKILLING
+	enabledByDefault = false
 )
 public class LavaCrafterPlugin extends Plugin
 {
@@ -270,7 +268,7 @@ public class LavaCrafterPlugin extends Plugin
 
 		if (!runEnabled && energy > nextRunVal)
 		{
-			entry = new MenuEntry("Toggle Run", "", 1, MenuOpcode.CC_OP.getId(), -1, 10485782, false);
+			entry = new MenuEntry("Toggle Run", "", 1, MenuAction.CC_OP.getId(), -1, 10485782, false);
 			click();
 			nextRunVal = r.nextInt(99) + 1;
 
@@ -533,7 +531,7 @@ public class LavaCrafterPlugin extends Plugin
 
 	public boolean checkHasBindingNecklace(Player localPlayer)
 	{
-		PlayerAppearance playerAppearance = localPlayer.getPlayerAppearance();
+		PlayerComposition playerAppearance = localPlayer.getPlayerComposition();
 
 		if (playerAppearance == null)
 		{
@@ -544,7 +542,7 @@ public class LavaCrafterPlugin extends Plugin
 
 		for (Item equipmentItem : equipmentItems)
 		{
-			String name = itemManager.getItemDefinition(equipmentItem.getId()).getName();
+			String name = itemManager.getItemComposition(equipmentItem.getId()).getName();
 			if (name.contains("Binding necklace"))
 				return true;
 		}
@@ -554,7 +552,7 @@ public class LavaCrafterPlugin extends Plugin
 
 	public boolean checkHasDuelingRing(Player localPlayer)
 	{
-		PlayerAppearance playerAppearance = localPlayer.getPlayerAppearance();
+		PlayerComposition playerAppearance = localPlayer.getPlayerComposition();
 
 		if (playerAppearance == null)
 		{
@@ -565,7 +563,7 @@ public class LavaCrafterPlugin extends Plugin
 
 		for (Item equipmentItem : equipmentItems)
 		{
-			String name = itemManager.getItemDefinition(equipmentItem.getId()).getName();
+			String name = itemManager.getItemComposition(equipmentItem.getId()).getName();
 			if (name.contains("Ring of dueling("))
 				return true;
 		}

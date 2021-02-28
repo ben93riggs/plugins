@@ -12,7 +12,7 @@ import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import static net.runelite.api.ObjectID.BROKEN_MULTICANNON_14916;
 import static net.runelite.api.ObjectID.CANNON_BASE;
 import static net.runelite.api.ObjectID.DWARF_MULTICANNON;
@@ -31,7 +31,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -39,8 +38,7 @@ import org.pf4j.Extension;
 	name = "Cannon Reloader",
 	description = "Automatically reload your cannon",
 	tags = {"combat", "notifications", "ranged"},
-	enabledByDefault = false,
-	type = PluginType.PVM
+	enabledByDefault = false
 )
 public class CannonReloaderPlugin extends Plugin
 {
@@ -112,7 +110,7 @@ public class CannonReloaderPlugin extends Plugin
 		{
 			if (cannonPosition.equals(gameObject.getWorldLocation()))
 			{
-				entry = new MenuEntry("Repair", "<col=ffff>Broken multicannon", gameObject.getId(), MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), cannon.getSceneMinLocation().getX(), cannon.getSceneMinLocation().getY(), false);
+				entry = new MenuEntry("Repair", "<col=ffff>Broken multicannon", gameObject.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), cannon.getSceneMinLocation().getX(), cannon.getSceneMinLocation().getY(), false);
 				click();
 				tickDelay = 3;
 			}
@@ -238,7 +236,7 @@ public class CannonReloaderPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Fire", "<col=ffff>Dwarf multicannon", DWARF_MULTICANNON, MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), cannon.getSceneMinLocation().getX(), cannon.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Fire", "<col=ffff>Dwarf multicannon", DWARF_MULTICANNON, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), cannon.getSceneMinLocation().getX(), cannon.getSceneMinLocation().getY(), false);
 		click();
 		tickDelay = 3;
 

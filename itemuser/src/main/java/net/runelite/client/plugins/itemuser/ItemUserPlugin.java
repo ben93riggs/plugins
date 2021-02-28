@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Point;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
@@ -30,7 +30,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.util.HotkeyListener;
 import org.pf4j.Extension;
 
@@ -39,8 +38,7 @@ import org.pf4j.Extension;
 	name = "Item User",
 	description = "Automatically uses items on an object",
 	tags = {"skilling", "item", "object", "user"},
-	enabledByDefault = false,
-	type = PluginType.SKILLING
+	enabledByDefault = false
 )
 public class ItemUserPlugin extends Plugin
 {
@@ -94,7 +92,7 @@ public class ItemUserPlugin extends Plugin
 
 				items.addAll(list);
 				object = findNearestGameObject(config.objectId());
-				item_name = Text.standardize(itemManager.getItemDefinition(config.itemId()).getName());
+				item_name = Text.standardize(itemManager.getItemComposition(config.itemId()).getName());
 			});
 		}
 	};
@@ -160,7 +158,7 @@ public class ItemUserPlugin extends Plugin
 
 		for (WidgetItem item : items)
 		{
-			entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemDefinition(item.getId()).getName(), item.getId(), MenuOpcode.ITEM_USE.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
+			entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemComposition(item.getId()).getName(), item.getId(), MenuAction.ITEM_USE.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
 
 			int randDelay = r.nextInt(config.waitMax() - config.waitMin()) + config.waitMin();
 
@@ -169,7 +167,7 @@ public class ItemUserPlugin extends Plugin
 				entryList.add(waitEntry);
 			}
 
-			entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemDefinition(item.getId()).getName() + "<col=ffffff> -> <col=ffff>" + client.getObjectDefinition(object.getId()).getName(), object.getId(), MenuOpcode.ITEM_USE_ON_GAME_OBJECT.getId(), object.getSceneMinLocation().getX(), object.getSceneMinLocation().getY(), false));
+			entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemComposition(item.getId()).getName() + "<col=ffffff> -> <col=ffff>" + client.getObjectDefinition(object.getId()).getName(), object.getId(), MenuAction.ITEM_USE_ON_GAME_OBJECT.getId(), object.getSceneMinLocation().getX(), object.getSceneMinLocation().getY(), false));
 
 			randDelay = r.nextInt(config.waitMax() - config.waitMin()) + config.waitMin();
 

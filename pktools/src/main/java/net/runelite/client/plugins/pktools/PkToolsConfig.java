@@ -1,10 +1,6 @@
 package net.runelite.client.plugins.pktools;
 
-import net.runelite.client.config.Config;
-import net.runelite.client.config.ConfigGroup;
-import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.Keybind;
-import net.runelite.client.config.Title;
+import net.runelite.client.config.*;
 
 import java.awt.event.KeyEvent;
 
@@ -16,16 +12,13 @@ public interface PkToolsConfig extends Config
 		"freeze, vengeance, teleblock, entangle, spec, wait, group#, id_#, " +
 		"protectfrommagic, protectfrommissiles, protectfrommelee";
 
-	@ConfigItem(
+	@ConfigTitle(
 		keyName = "label1",
 		name = "Hotkeys",
 		description = "",
 		position = 1
 	)
-	default Title label1()
-	{
-		return new Title();
-	}
+	String label1 = "label1";
 
 	@ConfigItem(
 		keyName = "key1",
@@ -203,16 +196,13 @@ public interface PkToolsConfig extends Config
 		return "freeze";
 	}
 
-	@ConfigItem(
+	@ConfigTitle(
 		keyName = "label2",
 		name = "Prayer",
 		description = "",
 		position = 18
 	)
-	default Title label2()
-	{
-		return new Title();
-	}
+	String label2 = "label2";
 
 	@ConfigItem(
 		position = 19,

@@ -12,7 +12,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -20,8 +19,7 @@ import org.pf4j.Extension;
 	name = "Event Debugger",
 	description = "",
 	tags = {"combat", "notifications", "health", "food", "eat"},
-	enabledByDefault = false,
-	type = PluginType.UTILITY
+	enabledByDefault = false
 )
 @Slf4j
 public class EventDebuggerPlugin extends Plugin
@@ -111,12 +109,12 @@ public class EventDebuggerPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked event) {
 		log.info("MenuOptionClicked:");
-		log.info("\tOption:\t" + event.getOption());
-		log.info("\tTarget:\t" + event.getTarget());
-		log.info("\tIdentifier:\t" + event.getIdentifier());
-		log.info("\tOpcode:\t" + event.getOpcode());
-		log.info("\tParam0:\t" + event.getParam0());
-		log.info("\tParam1:\t" + event.getParam1());
-		log.info("\tForceLeftClick:\t" + event.isForceLeftClick());
+		log.info("\tOption:\t" + event.getMenuOption());
+		log.info("\tTarget:\t" + event.getMenuTarget());
+		log.info("\tIdentifier:\t" + event.getId());
+		log.info("\tOpcode:\t" + event.getMenuAction());
+		log.info("\tParam0:\t" + event.getActionParam());
+		log.info("\tParam1:\t" + event.getWidgetId());
+		log.info("\tForceLeftClick:\t" + event.getSelectedItemIndex());
 	}
 }

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Skill;
 import net.runelite.api.Varbits;
 import net.runelite.api.events.GameTick;
@@ -34,7 +34,8 @@ public class RockCakeTask extends Task
 			return false;
 
 		//not overloaded
-		if (client.getVar(Varbits.NMZ_OVERLOAD) == 0)
+		//if (client.getVar(Varbits.NMZ_OVERLOAD) == 0)
+		if (client.getVarbitValue(3955) == 0)
 			return false;
 
 		//don't have rock cake
@@ -93,7 +94,7 @@ public class RockCakeTask extends Task
 
 		WidgetItem item = items.get(0);
 
-		entry = new MenuEntry("Guzzle", "<col=ff9040>Dwarven rock cake", item.getId(), MenuOpcode.ITEM_THIRD_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
+		entry = new MenuEntry("Guzzle", "<col=ff9040>Dwarven rock cake", item.getId(), MenuAction.ITEM_THIRD_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
 		click();
 	}
 }

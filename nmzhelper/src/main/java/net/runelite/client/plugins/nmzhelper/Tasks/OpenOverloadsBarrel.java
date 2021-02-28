@@ -7,7 +7,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.ObjectID;
 import net.runelite.api.QueryResults;
 import net.runelite.api.events.GameTick;
@@ -87,7 +87,7 @@ public class OpenOverloadsBarrel extends Task
 		if (gameObject == null)
 			return;
 
-		entry = new MenuEntry("Take", "<col=ffff>Overload potion", ObjectID.OVERLOAD_POTION, MenuOpcode.GAME_OBJECT_SECOND_OPTION.getId(), gameObject.getSceneMinLocation().getX(), gameObject.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Take", "<col=ffff>Overload potion", ObjectID.OVERLOAD_POTION, MenuAction.GAME_OBJECT_SECOND_OPTION.getId(), gameObject.getSceneMinLocation().getX(), gameObject.getSceneMinLocation().getY(), false);
 		click();
 	}
 

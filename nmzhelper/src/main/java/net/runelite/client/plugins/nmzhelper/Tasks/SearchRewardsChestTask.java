@@ -7,7 +7,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.ObjectID;
 import net.runelite.api.QueryResults;
 import net.runelite.api.events.GameTick;
@@ -96,7 +96,7 @@ public class SearchRewardsChestTask extends Task
 			return;
 		}
 
-		entry = new MenuEntry("Search", "<col=ffff>Rewards chest", ObjectID.REWARDS_CHEST, MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), obj.getSceneMinLocation().getX(), obj.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Search", "<col=ffff>Rewards chest", ObjectID.REWARDS_CHEST, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), obj.getSceneMinLocation().getX(), obj.getSceneMinLocation().getY(), false);
 		click();
 	}
 

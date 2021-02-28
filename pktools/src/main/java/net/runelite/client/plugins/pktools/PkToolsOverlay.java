@@ -21,8 +21,8 @@ import net.runelite.client.ui.overlay.components.ComponentConstants;
 import net.runelite.client.ui.overlay.components.ImageComponent;
 import net.runelite.client.ui.overlay.components.PanelComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
-import net.runelite.client.util.WeaponMap;
-import net.runelite.client.util.WeaponStyle;
+import com.openosrs.client.util.WeaponMap;
+import com.openosrs.client.util.WeaponStyle;
 
 @Singleton
 public class PkToolsOverlay extends Overlay
@@ -72,7 +72,7 @@ public class PkToolsOverlay extends Overlay
 
 		if (lastEnemy != null)
 		{
-			int WEAPON_INT = Objects.requireNonNull(lastEnemy.getPlayerAppearance()).getEquipmentId(KitType.WEAPON);
+			int WEAPON_INT = Objects.requireNonNull(lastEnemy.getPlayerComposition()).getEquipmentId(KitType.WEAPON);
 
 			WeaponStyle style = WeaponMap.StyleMap.getOrDefault(WEAPON_INT, null);
 

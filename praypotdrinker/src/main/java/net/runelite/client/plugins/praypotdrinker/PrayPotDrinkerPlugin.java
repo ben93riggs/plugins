@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Point;
 import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
@@ -21,7 +21,6 @@ import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -29,8 +28,7 @@ import org.pf4j.Extension;
 	name = "Prayer Pot Drinker",
 	description = "Automatically drink pray pots",
 	tags = {"combat", "notifications", "prayer"},
-	enabledByDefault = false,
-	type = PluginType.PVM
+	enabledByDefault = false
 )
 public class PrayPotDrinkerPlugin extends Plugin
 {
@@ -104,7 +102,7 @@ public class PrayPotDrinkerPlugin extends Plugin
 
 			if (currentPrayerPoints <= nextRestoreVal)
 			{
-				entry = getConsumableEntry(itemManager.getItemDefinition(restoreItem.getId()).getName(), restoreItem.getId(), restoreItem.getIndex());
+				entry = getConsumableEntry(itemManager.getItemComposition(restoreItem.getId()).getName(), restoreItem.getId(), restoreItem.getIndex());
 				click();
 				nextRestoreVal = r.nextInt(config.maxPrayerLevel() - config.minPrayerLevel()) + config.minPrayerLevel();
 			}
@@ -128,7 +126,7 @@ public class PrayPotDrinkerPlugin extends Plugin
 
 	private MenuEntry getConsumableEntry(String itemName, int itemId, int itemIndex)
 	{
-		return new MenuEntry("Drink", "<col=ff9040>" + itemName, itemId, MenuOpcode.ITEM_FIRST_OPTION.getId(), itemIndex, WidgetInfo.INVENTORY.getId(), false);
+		return new MenuEntry("Drink", "<col=ff9040>" + itemName, itemId, MenuAction.ITEM_FIRST_OPTION.getId(), itemIndex, WidgetInfo.INVENTORY.getId(), false);
 	}
 
 	public WidgetItem getRestoreItem()

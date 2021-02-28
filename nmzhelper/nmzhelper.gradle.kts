@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.16.0"
+version = "1.0.0"
 
 project.extra["PluginName"] = "NMZ Helper"
 project.extra["PluginDescription"] = "An automation utility for NMZ"

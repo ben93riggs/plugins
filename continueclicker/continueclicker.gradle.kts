@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.2.0"
+version = "1.0.0"
 
 project.extra["PluginName"] = "Continue Clicker"
 project.extra["PluginDescription"] = "Presses continue on dialogue when available"

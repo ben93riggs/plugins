@@ -11,7 +11,7 @@ import net.runelite.api.Actor;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
 import net.runelite.api.NpcID;
 import net.runelite.api.Point;
@@ -21,13 +21,12 @@ import net.runelite.api.events.AnimationChanged;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.NpcDefinitionChanged;
+import net.runelite.api.events.NpcChanged;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -35,8 +34,7 @@ import org.pf4j.Extension;
 	name = "Nightmare Auto Prayer",
 	enabledByDefault = false,
 	description = "Automatically swap prayers in Nightmare of Ashihama",
-	tags = {"bosses", "combat", "nm", "overlay", "nightmare", "pve", "pvm", "ashihama", "prayer", "pray", "ben", "ben93riggs"},
-	type = PluginType.PVM
+	tags = {"bosses", "combat", "nm", "overlay", "nightmare", "pve", "pvm", "ashihama", "prayer", "pray", "ben", "ben93riggs"}
 )
 
 @Slf4j
@@ -172,7 +170,7 @@ public class NightmareHelperPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onNpcDefinitionChanged(NpcDefinitionChanged event)
+	public void onNpcDefinitionChanged(NpcChanged event)
 	{
 		final NPC npc = event.getNpc();
 
@@ -275,7 +273,7 @@ public class NightmareHelperPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Activate", prayer_widget.getName(), 1, MenuOpcode.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false);
+		entry = new MenuEntry("Activate", prayer_widget.getName(), 1, MenuAction.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false);
 		click();
 	}
 

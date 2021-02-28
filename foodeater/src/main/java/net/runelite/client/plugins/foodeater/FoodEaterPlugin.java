@@ -14,24 +14,18 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 @Extension
 @PluginDescriptor(
 	name = "Food Eater",
 	description = "Automatically eats food",
 	tags = {"combat", "notifications", "health", "food", "eat"},
-	enabledByDefault = false,
-	type = PluginType.PVM
+	enabledByDefault = false
 )
 public class FoodEaterPlugin extends Plugin
 {
@@ -91,7 +85,7 @@ public class FoodEaterPlugin extends Plugin
 
 			for (WidgetItem item : inventory.getWidgetItems())
 			{
-				final String name = this.itemManager.getItemDefinition(item.getId()).getName();
+				final String name = this.itemManager.getItemComposition(item.getId()).getName();
 
 				if (name.equalsIgnoreCase(this.config.foodToEat()))
 				{
@@ -120,7 +114,7 @@ public class FoodEaterPlugin extends Plugin
 
 	private MenuEntry getConsumableEntry(String itemName, int itemId, int itemIndex)
 	{
-		return new MenuEntry("Eat", "<col=ff9040>" + itemName, itemId, MenuOpcode.ITEM_FIRST_OPTION.getId(), itemIndex, WidgetInfo.INVENTORY.getId(), false);
+		return new MenuEntry("Eat", "<col=ff9040>" + itemName, itemId, MenuAction.ITEM_FIRST_OPTION.getId(), itemIndex, WidgetInfo.INVENTORY.getId(), false);
 	}
 
 	public void click()

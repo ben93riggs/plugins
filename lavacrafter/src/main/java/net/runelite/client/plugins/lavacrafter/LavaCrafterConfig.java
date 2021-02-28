@@ -4,7 +4,7 @@ import net.runelite.client.config.Button;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.Title;
+import net.runelite.client.config.ConfigTitle;
 
 @ConfigGroup("lavacrafter")
 public interface LavaCrafterConfig extends Config
@@ -62,7 +62,7 @@ public interface LavaCrafterConfig extends Config
 		keyName = "autoEnableRun",
 		name = "Auto Enable Run",
 		description = "",
-		titleSection = "optionSection"
+		title = "optionSection"
 	)
 	default boolean autoEnableRun() { return true; }
 
@@ -71,7 +71,7 @@ public interface LavaCrafterConfig extends Config
 		keyName = "useMagicImbue",
 		name = "Use Magic Imbue",
 		description = "if disabled, will withdraw & use earth talismans instead",
-		titleSection = "optionSection"
+		title = "optionSection"
 	)
 	default boolean useMagicImbue() { return false; }
 
@@ -80,17 +80,17 @@ public interface LavaCrafterConfig extends Config
 		keyName = "disablePaint",
 		name = "Disable Paint",
 		description = "will disable drawing anything on screen",
-		titleSection = "optionSection"
+		title = "optionSection"
 	)
 	default boolean disablePaint() { return false; }
 
-	@ConfigItem(
+	@ConfigTitle(
 		position = 9,
 		keyName = "stopConditions",
 		name = "Stop Conditions",
 		description = ""
 	)
-	default Title stopConditionTitle() { return new Title(); }
+	String stopConditions = "stopConditions";
 
 	@ConfigItem(
 		position = 10,
@@ -128,13 +128,13 @@ public interface LavaCrafterConfig extends Config
 	)
 	default int timeStopConditionValue() { return 60; }
 
-	@ConfigItem(
+	@ConfigTitle(
 		position = 14,
 		keyName = "delayTitle",
 		name = "Delay",
 		description = ""
 	)
-	default Title delayTitle() { return new Title(); }
+	String delayTitle = "delayTitle";
 
 	@ConfigItem(
 		position = 15,
@@ -152,13 +152,13 @@ public interface LavaCrafterConfig extends Config
 	)
 	default int clickDelayMax() { return 5; }
 
-	@ConfigItem(
+	@ConfigTitle(
 		position = 17,
 		keyName = "controlsTitle",
 		name = "Controls",
 		description = ""
 	)
-	default Title controlsTitle() { return new Title(); }
+	String controlsTitle = "controlsTitle";
 
 	@ConfigItem(keyName = "startButton",
 		name = "Start",

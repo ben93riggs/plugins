@@ -32,7 +32,7 @@ public interface ScriptCommand
 				return;
 			}
 
-			plugin.entryList.add(new MenuEntry("Activate", prayer_widget.getName(), 1, MenuOpcode.CC_OP.getId(), -1, prayer_widget.getId(), false));
+			plugin.entryList.add(new MenuEntry("Activate", prayer_widget.getName(), 1, MenuAction.CC_OP.getId(), -1, prayer_widget.getId(), false));
 			click(client);
 		}
 		catch (Exception e)
@@ -54,7 +54,7 @@ public interface ScriptCommand
 				return;
 			}
 
-			plugin.entryList.add(new MenuEntry(spell_widget.getTargetVerb(), spell_widget.getName(), 1, MenuOpcode.CC_OP.getId(), spell_widget.getItemId(), spell_widget.getId(), false));
+			plugin.entryList.add(new MenuEntry(spell_widget.getTargetVerb(), spell_widget.getName(), 1, MenuAction.CC_OP.getId(), spell_widget.getItemId(), spell_widget.getId(), false));
 			click(client);
 		}
 		catch (Exception e)
@@ -76,7 +76,7 @@ public interface ScriptCommand
 				return;
 			}
 
-			plugin.entryList.add(new MenuEntry(spell_widget.getTargetVerb(), spell_widget.getName(), 0, MenuOpcode.WIDGET_TYPE_2.getId(), spell_widget.getItemId(), spell_widget.getId(), false));
+			plugin.entryList.add(new MenuEntry(spell_widget.getTargetVerb(), spell_widget.getName(), 0, MenuAction.WIDGET_TYPE_2.getId(), spell_widget.getItemId(), spell_widget.getId(), false));
 			click(client);
 		}
 		catch (Exception e)
@@ -365,7 +365,7 @@ class SpecCommand implements ScriptCommand
 				return;
 			}
 
-			plugin.entryList.add(new MenuEntry("Use <col=00ff00>Special Attack</col>", "", 1, MenuOpcode.CC_OP.getId(), -1, 38862884, false));
+			plugin.entryList.add(new MenuEntry("Use <col=00ff00>Special Attack</col>", "", 1, MenuAction.CC_OP.getId(), -1, 38862884, false));
 			click(client);
 		}
 		catch (Exception e)
@@ -407,7 +407,7 @@ class GroupCommand implements ScriptCommand
 			{
 				if (("Group " + groupNumber).equalsIgnoreCase(getTag(configManager, item.getId())))
 				{
-					plugin.entryList.add(new MenuEntry("Wield", "<col=ff9040>" + item.getId(), item.getId(), MenuOpcode.ITEM_SECOND_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
+					plugin.entryList.add(new MenuEntry("Wield", "<col=ff9040>" + item.getId(), item.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
 				}
 			}
 			click(client);
@@ -451,7 +451,7 @@ class ItemCommand implements ScriptCommand
 			{
 				if (itemId == item.getId())
 				{
-					plugin.entryList.add(new MenuEntry("Wield", "<col=ff9040>" + item.getId(), item.getId(), MenuOpcode.ITEM_SECOND_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
+					plugin.entryList.add(new MenuEntry("Wield", "<col=ff9040>" + item.getId(), item.getId(), MenuAction.ITEM_SECOND_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false));
 					click(client);
 					return;
 				}
@@ -473,7 +473,7 @@ class ClickEnemyCommand implements ScriptCommand
 		{
 			if (plugin.lastEnemy != null)
 			{
-				plugin.entryList.add(new MenuEntry("", "", plugin.lastEnemy.getPlayerId(), client.isSpellSelected() ? MenuOpcode.SPELL_CAST_ON_PLAYER.getId() : MenuOpcode.PLAYER_SECOND_OPTION.getId(), 0, 0, false));
+				plugin.entryList.add(new MenuEntry("", "", plugin.lastEnemy.getPlayerId(), client.getSpellSelected() ? MenuAction.SPELL_CAST_ON_PLAYER.getId() : MenuAction.PLAYER_SECOND_OPTION.getId(), 0, 0, false));
 				click(client);
 			}
 		}

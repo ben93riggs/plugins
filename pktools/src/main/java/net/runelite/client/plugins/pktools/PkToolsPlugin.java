@@ -15,9 +15,9 @@ import net.runelite.api.Actor;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Player;
-import net.runelite.api.PlayerAppearance;
+import net.runelite.api.PlayerComposition;
 import net.runelite.api.Point;
 import net.runelite.api.Prayer;
 import net.runelite.api.Skill;
@@ -33,11 +33,10 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.plugins.pktools.ScriptCommand.ScriptCommand;
 import net.runelite.client.ui.overlay.OverlayManager;
-import net.runelite.client.util.WeaponMap;
-import net.runelite.client.util.WeaponStyle;
+import com.openosrs.client.util.WeaponMap;
+import com.openosrs.client.util.WeaponStyle;
 import org.pf4j.Extension;
 
 @Extension
@@ -45,8 +44,7 @@ import org.pf4j.Extension;
 	name = "PKing Tools",
 	description = "Arsenal of PKing Tools",
 	tags = {"combat", "player", "enemy", "tracking", "overlay"},
-	enabledByDefault = false,
-	type = PluginType.PVP
+	enabledByDefault = false
 )
 public class PkToolsPlugin extends Plugin
 {
@@ -242,7 +240,7 @@ public class PkToolsPlugin extends Plugin
 			return;
 		}
 
-		entryList.add(new MenuEntry("Activate", prayer_widget.getName(), 1, MenuOpcode.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false));
+		entryList.add(new MenuEntry("Activate", prayer_widget.getName(), 1, MenuAction.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false));
 		click();
 	}
 
@@ -265,7 +263,7 @@ public class PkToolsPlugin extends Plugin
 				return;
 			}
 
-			PlayerAppearance lastEnemyAppearance = lastEnemy.getPlayerAppearance();
+			PlayerComposition lastEnemyAppearance = lastEnemy.getPlayerComposition();
 
 			if (lastEnemyAppearance == null)
 			{

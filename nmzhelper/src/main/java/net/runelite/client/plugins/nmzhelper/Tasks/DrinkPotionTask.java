@@ -7,7 +7,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.QueryResults;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.queries.GameObjectQuery;
@@ -82,7 +82,7 @@ public class DrinkPotionTask extends Task
 		if (object == null)
 			return;
 
-		entry = new MenuEntry("Drink", "<col=ffff><col=ff9040>Potion", 26291, MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), object.getSceneMinLocation().getX(), object.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Drink", "<col=ffff><col=ff9040>Potion", 26291, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), object.getSceneMinLocation().getX(), object.getSceneMinLocation().getY(), false);
 		click();
 	}
 

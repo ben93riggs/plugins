@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import net.runelite.api.Client;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Point;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.MenuOptionClicked;
@@ -15,7 +15,6 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Singleton
@@ -24,8 +23,7 @@ import org.pf4j.Extension;
 	name = "Continue Clicker",
 	description = "APresses continue on dialogue when available",
 	tags = {"continue", "chat", "dialogue", "clicker"},
-	enabledByDefault = false,
-	type = PluginType.MISCELLANEOUS
+	enabledByDefault = false
 )
 public class ContinueClickerPlugin extends Plugin
 {
@@ -50,7 +48,7 @@ public class ContinueClickerPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Continue", "", 0, MenuOpcode.WIDGET_TYPE_6.getId(), -1, widget.getId(), false);
+		entry = new MenuEntry("Continue", "", 0, MenuAction.WIDGET_TYPE_6.getId(), -1, widget.getId(), false);
 		click();
 	}
 

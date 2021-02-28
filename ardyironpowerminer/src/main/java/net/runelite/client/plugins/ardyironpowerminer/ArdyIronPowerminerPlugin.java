@@ -16,7 +16,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Player;
 import net.runelite.api.Point;
 import net.runelite.api.coords.WorldPoint;
@@ -32,7 +32,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -40,8 +39,7 @@ import org.pf4j.Extension;
 	name = "Ardy Iron Powerminer",
 	description = "Automatically powermines iron @ ardy mine",
 	tags = {"mining", "mine", "powermine", "iron", "ardy", "ardougne", "skill", "skilling"},
-	enabledByDefault = false,
-	type = PluginType.SKILLING
+	enabledByDefault = false
 )
 public class ArdyIronPowerminerPlugin extends Plugin
 {
@@ -148,7 +146,7 @@ public class ArdyIronPowerminerPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Drop", "<col=ff9040>Iron ore", list.get(0).getId(), MenuOpcode.ITEM_FIFTH_OPTION.getId(), list.get(0).getIndex(), WidgetInfo.INVENTORY.getId(), false);
+		entry = new MenuEntry("Drop", "<col=ff9040>Iron ore", list.get(0).getId(), MenuAction.ITEM_FIFTH_OPTION.getId(), list.get(0).getIndex(), WidgetInfo.INVENTORY.getId(), false);
 		click();
 		frameDelay = 10;
 	}
@@ -192,7 +190,7 @@ public class ArdyIronPowerminerPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Mine", "<col=ffff>Rocks", rock.getId(), MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), rock.getSceneMinLocation().getX(), rock.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Mine", "<col=ffff>Rocks", rock.getId(), MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), rock.getSceneMinLocation().getX(), rock.getSceneMinLocation().getY(), false);
 		click();
 		tickDelay = 1;
 	}

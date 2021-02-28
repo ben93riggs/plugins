@@ -10,7 +10,6 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 import javax.inject.Inject;
@@ -22,8 +21,7 @@ import java.awt.event.MouseEvent;
 	name = "Jad Auto Prayer",
 	description = "Auto click proper prayers against Jad(s).",
 	tags = {"bosses", "combat", "minigame", "overlay", "prayer", "pve", "pvm", "jad", "firecape", "fight", "cave", "caves"},
-	enabledByDefault = false,
-	type = PluginType.MINIGAME
+	enabledByDefault = false
 )
 public class JadAutoPrayerPlugin extends Plugin
 {
@@ -31,6 +29,8 @@ public class JadAutoPrayerPlugin extends Plugin
 	private Client client;
 
 	public MenuEntry entry;
+	public static final int JALTOK_JAD_MAGE_ATTACK = 7592;
+	public static final int JALTOK_JAD_RANGE_ATTACK = 7593;
 
 	@Override
 	protected void startUp() throws Exception
@@ -52,17 +52,18 @@ public class JadAutoPrayerPlugin extends Plugin
 			return;
 		}
 
+
 		switch (actor.getAnimation())
 		{
 			case AnimationID.TZTOK_JAD_MAGIC_ATTACK:
-			case AnimationID.JALTOK_JAD_MAGE_ATTACK:
+			case JALTOK_JAD_MAGE_ATTACK:
 				if (client.getVar(Prayer.PROTECT_FROM_MAGIC.getVarbit()) == 0)
 				{
 					activatePrayer(WidgetInfo.PRAYER_PROTECT_FROM_MAGIC);
 				}
 				break;
 			case AnimationID.TZTOK_JAD_RANGE_ATTACK:
-			case AnimationID.JALTOK_JAD_RANGE_ATTACK:
+			case JALTOK_JAD_RANGE_ATTACK:
 				if (client.getVar(Prayer.PROTECT_FROM_MISSILES.getVarbit()) == 0)
 				{
 					activatePrayer(WidgetInfo.PRAYER_PROTECT_FROM_MISSILES);
@@ -97,7 +98,7 @@ public class JadAutoPrayerPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Activate", prayer_widget.getName(), 1, MenuOpcode.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false);
+		entry = new MenuEntry("Activate", prayer_widget.getName(), 1, MenuAction.CC_OP.getId(), prayer_widget.getItemId(), prayer_widget.getId(), false);
 		click();
 	}
 

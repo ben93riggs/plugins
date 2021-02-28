@@ -17,7 +17,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
 import net.runelite.api.Point;
 import net.runelite.api.Skill;
@@ -35,7 +35,6 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -43,8 +42,7 @@ import org.pf4j.Extension;
 	name = "Auto Thiever",
 	description = "Automatically thieves npcs",
 	tags = {"auto", "thiever", "thieving", "skill", "skilling"},
-	enabledByDefault = false,
-	type = PluginType.SKILLING
+	enabledByDefault = false
 )
 public class AutoThieverPlugin extends Plugin
 {
@@ -169,7 +167,7 @@ public class AutoThieverPlugin extends Plugin
 		}
 
 		//String option, String target, int identifier, int opcode, int param0, int param1, boolean forceLeftClick
-		entry = new MenuEntry("Pickpocket", "<col=ffff00>" + npc.getName() + "<col=ff00>  (level-" + npc.getCombatLevel() + ")", npc.getIndex(), MenuOpcode.NPC_THIRD_OPTION.getId(), 0, 0, false);
+		entry = new MenuEntry("Pickpocket", "<col=ffff00>" + npc.getName() + "<col=ff00>  (level-" + npc.getCombatLevel() + ")", npc.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0, false);
 		click();
 		tickDelay = 1;
 	}
@@ -207,7 +205,7 @@ public class AutoThieverPlugin extends Plugin
 		}
 
 		//String option, String target, int identifier, int opcode, int param0, int param1, boolean forceLeftClick
-		entry = new MenuEntry("Open-all", "<col=ff9040>" + itemManager.getItemDefinition(item.getId()).getName(), item.getId(), MenuOpcode.ITEM_FIRST_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
+		entry = new MenuEntry("Open-all", "<col=ff9040>" + itemManager.getItemComposition(item.getId()).getName(), item.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
 		click();
 		tickDelay = 1;
 	}
@@ -235,7 +233,7 @@ public class AutoThieverPlugin extends Plugin
 			return;
 		}
 
-		entry = new MenuEntry("Eat", "<col=ff9040>" + this.itemManager.getItemDefinition(item.getId()).getName(), item.getId(), MenuOpcode.ITEM_FIRST_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
+		entry = new MenuEntry("Eat", "<col=ff9040>" + this.itemManager.getItemComposition(item.getId()).getName(), item.getId(), MenuAction.ITEM_FIRST_OPTION.getId(), item.getIndex(), WidgetInfo.INVENTORY.getId(), false);
 		click();
 		tickDelay = 4;
 	}

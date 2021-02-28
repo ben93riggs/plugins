@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Point;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.widgets.Widget;
@@ -25,7 +25,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.util.HotkeyListener;
 import org.pf4j.Extension;
 
@@ -34,8 +33,7 @@ import org.pf4j.Extension;
 	name = "Item Combiner",
 	description = "Automatically uses items on another item",
 	tags = {"skilling", "item", "object", "combiner"},
-	enabledByDefault = false,
-	type = PluginType.SKILLING
+	enabledByDefault = false
 )
 public class ItemCombinerPlugin extends Plugin
 {
@@ -121,7 +119,7 @@ public class ItemCombinerPlugin extends Plugin
 							return;
 						}
 
-						entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemDefinition(firstItem.getId()).getName(), firstItem.getId(), MenuOpcode.ITEM_USE.getId(), firstItem.getIndex(), WidgetInfo.INVENTORY.getId(), false));
+						entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemComposition(firstItem.getId()).getName(), firstItem.getId(), MenuAction.ITEM_USE.getId(), firstItem.getIndex(), WidgetInfo.INVENTORY.getId(), false));
 
 						int randDelay = r.nextInt(config.waitMax() - config.waitMin()) + config.waitMin();
 
@@ -130,7 +128,7 @@ public class ItemCombinerPlugin extends Plugin
 							entryList.add(waitEntry);
 						}
 
-						entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemDefinition(firstItem.getId()).getName() + "<col=ffffff> -> <col=ff9040>" + itemManager.getItemDefinition(secondItem.getId()).getName(), secondItem.getId(), MenuOpcode.ITEM_USE_ON_WIDGET_ITEM.getId(), secondItem.getIndex(), WidgetInfo.INVENTORY.getId(), false));
+						entryList.add(new MenuEntry("Use", "<col=ff9040>" + itemManager.getItemComposition(firstItem.getId()).getName() + "<col=ffffff> -> <col=ff9040>" + itemManager.getItemComposition(secondItem.getId()).getName(), secondItem.getId(), MenuAction.ITEM_USE_ON_WIDGET_ITEM.getId(), secondItem.getIndex(), WidgetInfo.INVENTORY.getId(), false));
 
 						randDelay = r.nextInt(config.waitMax() - config.waitMin()) + config.waitMin();
 

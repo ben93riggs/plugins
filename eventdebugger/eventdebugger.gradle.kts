@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.6.0"
+version = "1.0.0"
 
 project.extra["PluginName"] = "Event Debugger"
 project.extra["PluginDescription"] = ""

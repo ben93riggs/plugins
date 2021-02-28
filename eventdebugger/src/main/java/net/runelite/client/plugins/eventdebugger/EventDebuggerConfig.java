@@ -3,17 +3,18 @@ package net.runelite.client.plugins.eventdebugger;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
-import net.runelite.client.config.ConfigSection;
+import net.runelite.client.config.ConfigTitle;
 
 @ConfigGroup("eventdebugger")
 public interface EventDebuggerConfig extends Config
 {
-	@ConfigSection(
+	@ConfigTitle(
 		position = 0,
 		keyName = "menuEntryAddedSection",
 		name = "MenuEntryAdded",
 		description = ""
 	)
+	String menuEntryAddedSection = "menuEntryAddedSection";
 
 	@ConfigItem(
 		position = 1,

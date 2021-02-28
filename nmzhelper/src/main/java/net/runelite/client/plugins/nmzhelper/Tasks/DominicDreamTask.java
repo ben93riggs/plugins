@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.NPC;
 import net.runelite.api.NpcID;
 import net.runelite.api.QueryResults;
@@ -99,7 +99,7 @@ public class DominicDreamTask extends Task
 			return;
 
 		//String option, String target, int identifier, int opcode, int param0, int param1, boolean forceLeftClick
-		entry = new MenuEntry("Dream", "<col=ffff00>Dominic Onion", dominicOnion.getIndex(), MenuOpcode.NPC_THIRD_OPTION.getId(), 0, 0, false);
+		entry = new MenuEntry("Dream", "<col=ffff00>Dominic Onion", dominicOnion.getIndex(), MenuAction.NPC_THIRD_OPTION.getId(), 0, 0, false);
 		click();
 	}
 

@@ -3,7 +3,7 @@ package net.runelite.client.plugins.nmzhelper.Tasks;
 import net.runelite.api.Client;
 import net.runelite.api.GameObject;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.ObjectID;
 import net.runelite.api.QueryResults;
 import net.runelite.api.events.GameTick;
@@ -74,7 +74,7 @@ public class PowerSurgeTask extends Task
 			return;
 		}
 
-		entry = new MenuEntry("Activate", "<col=ffff>Power surge", ObjectID.POWER_SURGE, MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), obj.getSceneMinLocation().getX(), obj.getSceneMinLocation().getY(), false);
+		entry = new MenuEntry("Activate", "<col=ffff>Power surge", ObjectID.POWER_SURGE, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), obj.getSceneMinLocation().getX(), obj.getSceneMinLocation().getY(), false);
 		click();
 	}
 }

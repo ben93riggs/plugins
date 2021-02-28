@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.Point;
 import net.runelite.api.VarPlayer;
 import net.runelite.api.events.GameTick;
@@ -18,7 +18,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import org.pf4j.Extension;
 
 @Extension
@@ -26,8 +25,7 @@ import org.pf4j.Extension;
 	name = "Special Attack User",
 	description = "Automatically enables special attack",
 	tags = {"combat", "special", "attack", "spec"},
-	enabledByDefault = false,
-	type = PluginType.PVM
+	enabledByDefault = false
 )
 public class SpecialAttackUserPlugin extends Plugin
 {
@@ -105,7 +103,7 @@ public class SpecialAttackUserPlugin extends Plugin
 
 		try
 		{
-			entry = new MenuEntry("Use <col=00ff00>Special Attack</col>", "", 1, MenuOpcode.CC_OP.getId(), -1, 38862884, false);
+			entry = new MenuEntry("Use <col=00ff00>Special Attack</col>", "", 1, MenuAction.CC_OP.getId(), -1, 38862884, false);
 			click();
 		}
 		catch (Exception e)

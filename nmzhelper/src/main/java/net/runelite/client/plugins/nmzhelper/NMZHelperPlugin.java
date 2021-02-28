@@ -25,7 +25,6 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.PluginType;
 import net.runelite.client.plugins.nmzhelper.Tasks.AbsorptionTask;
 import net.runelite.client.plugins.nmzhelper.Tasks.AcceptDreamTask;
 import net.runelite.client.plugins.nmzhelper.Tasks.BenefitsTabTask;
@@ -54,8 +53,7 @@ import org.pf4j.Extension;
 	name = "NMZ Helper",
 	description = "An automation utility for NMZ",
 	tags = {"combat", "potion", "overload", "absorption", "nmz", "nightmare", "zone", "helper"},
-	enabledByDefault = false,
-	type = PluginType.MINIGAME
+	enabledByDefault = false
 )
 public class NMZHelperPlugin extends Plugin
 {

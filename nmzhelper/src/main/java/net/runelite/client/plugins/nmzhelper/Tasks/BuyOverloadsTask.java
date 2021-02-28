@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import net.runelite.api.Client;
 import net.runelite.api.ItemID;
 import net.runelite.api.MenuEntry;
-import net.runelite.api.MenuOpcode;
+import net.runelite.api.MenuAction;
 import net.runelite.api.VarPlayer;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.widgets.Widget;
@@ -94,7 +94,7 @@ public class BuyOverloadsTask extends Task
 			return;
 		}
 
-		entry = new MenuEntry("Buy-50", "<col=ff9040>Overload (1)", 4, MenuOpcode.CC_OP.getId(), 6, overloadWidget.getId(), false);
+		entry = new MenuEntry("Buy-50", "<col=ff9040>Overload (1)", 4, MenuAction.CC_OP.getId(), 6, overloadWidget.getId(), false);
 		click();
 	}
 
