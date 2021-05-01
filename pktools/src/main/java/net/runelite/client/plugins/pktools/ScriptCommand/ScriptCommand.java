@@ -289,6 +289,27 @@ class FreezeCommand implements ScriptCommand
 	}
 }
 
+class FireSurgeCommand implements ScriptCommand
+{
+	public void execute(Client client, PkToolsConfig config, PkToolsPlugin plugin, ConfigManager configManager)
+	{
+		try
+		{
+			int boosted_level = client.getBoostedSkillLevel(Skill.MAGIC);
+
+			if (boosted_level >= 95)
+			{
+				clickSpell(WidgetInfo.SPELL_FIRE_SURGE, client, plugin);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+}
+
 class VengeanceCommand implements ScriptCommand
 {
 	public void execute(Client client, PkToolsConfig config, PkToolsPlugin plugin, ConfigManager configManager)
